@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import RightwideDrawer from "../models/RightwideDrawer";
 
 export const Homepage = () => {
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);

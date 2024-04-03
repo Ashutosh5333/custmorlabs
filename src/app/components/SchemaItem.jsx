@@ -9,11 +9,12 @@ export const SchemaItem = ({ value, onChange, selectedValue }) => (
       </span>
       <div className="relative w-[100%]">
         <select
+          defaultValue={selectedValue} 
           onChange={onChange}
           value={selectedValue}
           className="border-2 rounded w-[100%] text-sm py-2 px-3 text-gray-700 leading-tight"
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             Add schema to segment
           </option>
           <option value="first_name">First Name</option>
@@ -26,8 +27,10 @@ export const SchemaItem = ({ value, onChange, selectedValue }) => (
         </select>
       </div>
       <div className=" bg-gray-200 rounded m-1 px-2 py-2">
-      {/* <AiOutlineMinus className="text-xl font-semibold" /> */}
-      <FaMinus className="text-xl font-semibold" />
+       
+        <FaMinus className="text-xl font-semibold" />
       </div>
     </div>
-  );
+);
+
+export default SchemaItem;
