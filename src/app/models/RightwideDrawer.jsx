@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineArrowBackIos } from "react-icons/md";
-import { AiOutlineMinus } from "react-icons/ai";
 import { IoIosAdd } from "react-icons/io";
 import { SchemaItem } from "../components/SchemaItem";
 import { SegmentItem } from "../components/SegmentItem";
+import { handleGetdata, handlePost } from "../Cutomfetch/Postmethod";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
-const RightwideDrawer = () => {
+const RightwideDrawer = ({ togglePopup }) => {
   const [selectedSchema, setSelectedSchema] = useState("");
   const [segment_name, SetSegmentName] = useState("");
   const [segments, setSegments] = useState([]);
+  const [data, SetData] = useState([]);
+  const [showOverlay, setShowOverlay] = useState(true);
 
   const handleSchemaChange = (e) => {
     setSelectedSchema(e.target.value);
   };
 
   const addSegment = () => {
+     
     const formattedSchema = {
       [selectedSchema]:
         selectedSchema.charAt(0).toUpperCase() +
@@ -31,8 +36,6 @@ const RightwideDrawer = () => {
     setSelectedSchema("");
   };
 
-  console.log("segm",segments)
-
   const removeSegment = (id) => {
     const updatedSegments = segments.filter((segment) => segment.id !== id);
     setSegments(updatedSegments);
@@ -44,11 +47,32 @@ const RightwideDrawer = () => {
       [segment.selectedSchema]: segment.name,
     })),
   };
-  console.log("payload", payload);
+
+  const handlePostRequest = () => {
+    if(segment_name==""){
+      toast.error("Fill this Field")
+    }else{
+      handlePost(payload);
+    }
+ 
+  };
+
+  useEffect(() => {
+    handleGetdata()
+      .then((res) => {
+        SetData(res.data);
+      })
+      .catch((err) => {});
+  }, []);
 
   return (
     <>
-      <div className=" min-h-screen  right-0 top-0 w-[100%]  bg-white border-2  border-yellow-300   rounded shadow-lg">
+      <div
+       onClick={togglePopup}
+      className="fixed top-0 left-0 w-full h-full 
+      bg-black opacity-50 z-10" style={{ display: showOverlay ? 'block' : 'none' }} />
+   
+   <div className=" z-50 min-h-screen w-[50%] absolute  m-auto  right-0 top-0  bg-white border-yellow-300   rounded shadow-lg ">
         <div className="flex py-4  bg-blue-400 items-center mb-4">
           <span className=" text-white px-4 py-2 rounded mr-2">
             <MdOutlineArrowBackIos />
@@ -91,11 +115,11 @@ const RightwideDrawer = () => {
           </div>
         </div>
 
-        <div className="flex border-2 py-2  border-blue-400 w-[100%] flex-col gap-5 mb-4 px-4">
+        <div className={`flex  ${segments.length > 0 ? "border-2 " : ""}  py-2  border-blue-400 w-[100%] flex-col gap-5 mb-4 px-4`}>
           {segments.length > 0 &&
             segments.map((el, i) => {
               return (
-                <SegmentItem key={i} segments={el} onRemove={removeSegment} />
+                <SegmentItem key={i} index={i} segments={el} onRemove={removeSegment} />
               );
             })}
         </div>
@@ -124,15 +148,26 @@ const RightwideDrawer = () => {
           </div>
         </div>
 
-        <div className="flex justify-start  gap-4 px-4">
-          <button className="bg-green-400 text-sm font-semibold text-white px-4 py-2 rounded">
+        <div className="flex absolute bg-gray-200 w-[100%] py-8 bottom-0 justify-start  gap-4 px-4">
+          <button
+            onClick={handlePostRequest}
+            className="bg-green-400 text-sm font-semibold text-white px-4 py-2 rounded"
+          >
             Save the Segment
           </button>
-          <button className="bg-gray-200 text-sm font-semibold text-red-400 px-4 py-2 rounded">
+          <button
+            onClick={togglePopup}
+            className="bg-white text-sm font-semibold text-red-400 px-4 py-2 rounded"
+          >
             Cancel
           </button>
         </div>
+
+
       </div>
+
+    
+       <ToastContainer />
     </>
   );
 };
