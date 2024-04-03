@@ -17,14 +17,7 @@ export const Homepage = () => {
   return (
     <>
       <div className="w-[100%] flex justify-between border-2 border-black   items-center h-screen">
-        {/* {!showPopup && (
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={togglePopup}
-          >
-            Save segment
-          </button>
-        )} */}
+        
         <button
             className="bg-blue-500 text-white px-4 py-2 rounded"
             onClick={togglePopup}

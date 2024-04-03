@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const handlePost = (payload) => {
-    fetch("http://localhost:8000/usercreate", {
+    fetch("https://nutty-clam-school-uniform.cyclic.app/usercreate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const handlePost = (payload) => {
 
 
   export const handleGetdata = () => {
-    return fetch("http://localhost:8000/getuser", {
+    return fetch("https://nutty-clam-school-uniform.cyclic.app/getuser", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
