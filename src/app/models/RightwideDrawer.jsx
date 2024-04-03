@@ -72,12 +72,12 @@ const RightwideDrawer = ({ togglePopup }) => {
       className="fixed top-0 left-0 w-full h-full 
       bg-black opacity-50 z-10" style={{ display: showOverlay ? 'block' : 'none' }} />
    
-   <div className=" z-50 min-h-screen w-[50%] absolute  m-auto  right-0 top-0  bg-white border-yellow-300   rounded shadow-lg ">
-        <div className="flex py-4  bg-blue-400 items-center mb-4">
+   <div className=" z-50 min-h-screen w-[70%] md:w-[40%] lg:w-[30%] absolute  m-auto  right-0 top-0  bg-white border-yellow-300   rounded shadow-lg ">
+        <div className="flex py-4  bg-[#47a6bc] items-center mb-4">
           <span className=" text-white px-4 py-2 rounded mr-2">
             <MdOutlineArrowBackIos />
           </span>
-          <h2 className="text-white font-semibold">Saving Segment</h2>
+          <h2 className="text-white font-normal">Saving Segment</h2>
         </div>
 
         <div className="mb-4 px-4">
@@ -100,22 +100,23 @@ const RightwideDrawer = ({ togglePopup }) => {
           To save your segment you need to add the schemas to build query{" "}
         </p>
 
-        <div className="flex justify-end mb-4 px-4">
+        <div className="flex justify-end mb-4 px-6">
           <div className="flex items-center mr-4">
             <span className="bg-green-500  text-white rounded-full px-2 py-2   mr-2">
-              <circle cx="12" cy="12" r="10" fill="green" />
+              <circle cx="6" cy="6" r="30" fill="green" />
             </span>
-            <p className="text text-sm">- User Traits</p>
+            <p className="text text-[.8rem]">- User Traits</p>
           </div>
           <div className="flex items-center">
             <span className="bg-pink-500 text-white rounded-full px-2 py-2   mr-2">
               <circle cx="6" cy="6" r="30" fill="pink" />
             </span>
-            <p className="text text-sm">- Group Traits</p>
+            <p className="text text-[.8rem]">- Group Traits</p>
           </div>
         </div>
 
-        <div className={`flex  ${segments.length > 0 ? "border-2 " : ""}  py-2  border-blue-400 w-[100%] flex-col gap-5 mb-4 px-4`}>
+      <div className="px-2">
+      <div className={`flex  ${segments.length > 0 ? "border-2 " : ""}  py-2  border-[#47a6bc] w-[100%] flex-col gap-5 mb-4 px-4`}>
           {segments.length > 0 &&
             segments.map((el, i) => {
               return (
@@ -132,7 +133,7 @@ const RightwideDrawer = ({ togglePopup }) => {
           />
         </div>
 
-        <div className="flex py-2  border-red-800 w-[100%] flex-col gap-5 mb-4 px-4">
+        <div className="flex   border-red-800 w-[100%] flex-col gap-5 mb-4 px-4">
           <div className="flex w-[100%] py-2  border-black items-center mr-4">
             <span className=" text-white rounded-full px-2 py-2 mr-2">
               <IoIosAdd className="font-semibold  text-blue-400 text-2xl" />
@@ -140,24 +141,27 @@ const RightwideDrawer = ({ togglePopup }) => {
             <div
               onClick={addSegment}
               disabled={!selectedSchema}
-              className="text-left  text-blue-400 font-semibold underline relative w-[100%]"
+              className="text-left  text-blue-400 font-normal underline relative w-[100%]"
             >
               Add new schema
-            </div>
-            <div className="border-b-2 border-green-500 " />
+            </div>   
+            
           </div>
         </div>
+      </div>
+      
+
 
         <div className="flex absolute bg-gray-200 w-[100%] py-8 bottom-0 justify-start  gap-4 px-4">
           <button
             onClick={handlePostRequest}
-            className="bg-green-400 text-sm font-semibold text-white px-4 py-2 rounded"
+            className="bg-[#5fc7a1] text-[.8rem] font-semibold text-white px-4 py-2 rounded"
           >
             Save the Segment
           </button>
           <button
             onClick={togglePopup}
-            className="bg-white text-sm font-semibold text-red-400 px-4 py-2 rounded"
+            className="bg-white text-[.8rem] font-semibold text-red-400 px-4 py-2 rounded"
           >
             Cancel
           </button>
