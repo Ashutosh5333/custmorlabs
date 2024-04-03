@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { MdOutlineArrowBackIos } from "react-icons/md";
+
 import { AiOutlineMinus } from "react-icons/ai";
-import { IoIosAdd } from "react-icons/io";
+
+
 
 export  const SegmentItem = ({ segments, onRemove }) => (
     <div className="flex w-[100%] py-2 border-black items-center mr-4">
-      <span className="bg-green-500 text-white rounded-full px-2 py-2 mr-2">
+      <span className={`bg-green-500 text-white rounded-full px-2 py-2 mr-2`}>
         <circle cx="12" cy="12" r="10" fill="green" />
       </span>
       <div className="relative w-[100%]">
@@ -15,9 +16,16 @@ export  const SegmentItem = ({ segments, onRemove }) => (
           </option>
         </select>
       </div>
-      <div onClick={() => onRemove(segments.id)} className="border-2 m-1 px-2 py-2">
-        <AiOutlineMinus />
+      <div onClick={() => onRemove(segments.id)} className=" bg-gray-200 rounded m-1 px-2 py-2">
+        <AiOutlineMinus className="text-lg" />
       </div>
     </div>
   );
   
+//   {
+//     "segment_name": "last_10_days_blog_visits",
+//     "schema": [
+//     {"first_name": "First name"},
+//     {"last_name": "Last name"}
+//     ]
+//     } like this 

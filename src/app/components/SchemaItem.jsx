@@ -24,7 +24,7 @@ export const SchemaItem = ({ value, onChange, selectedValue }) => (
           <option value="State">state</option>
         </select>
       </div>
-      <div className="border-2 m-1 px-2 py-2">
+      <div className=" bg-gray-200 rounded m-1 px-2 py-2">
         <AiOutlineMinus />
       </div>
     </div>

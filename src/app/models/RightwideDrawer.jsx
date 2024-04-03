@@ -2,50 +2,59 @@ import React, { useState } from "react";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoIosAdd } from "react-icons/io";
-import {SchemaItem} from "../components/SchemaItem";
-import {SegmentItem} from "../components/SegmentItem"
+import { SchemaItem } from "../components/SchemaItem";
+import { SegmentItem } from "../components/SegmentItem";
 
 const RightwideDrawer = () => {
   const [selectedSchema, setSelectedSchema] = useState("");
-//   const [segments, setSegments] = useState([
-//     { id: 1, name: "First name" },
-//     { id: 2, name: "Last name" },
-//   ]);
-
-const [segments, setSegments] = useState([]);
+  const [segment_name, SetSegmentName] = useState("");
+  const [segments, setSegments] = useState([]);
 
   const handleSchemaChange = (e) => {
     setSelectedSchema(e.target.value);
   };
 
   const addSegment = () => {
+    const formattedSchema = {
+      [selectedSchema]:
+        selectedSchema.charAt(0).toUpperCase() +
+        selectedSchema.slice(1).replace("_", " "),
+    };
+
     const newSegment = {
       id: Date.now(),
-      name: selectedSchema,
-      schema: selectedSchema,
+      name: formattedSchema[selectedSchema],
+      schema: formattedSchema,
+      selectedSchema,
     };
     setSegments([...segments, newSegment]);
-    setSelectedSchema("")
+    setSelectedSchema("");
   };
-  
-//   console.log("schemma", selectedSchema)
-  
+
+  console.log("segm",segments)
+
   const removeSegment = (id) => {
-    const updatedSegments = segments.filter(segment => segment.id !== id);
+    const updatedSegments = segments.filter((segment) => segment.id !== id);
     setSegments(updatedSegments);
   };
+
+  const payload = {
+    segment_name: segment_name,
+    schema: segments.map((segment) => ({
+      [segment.selectedSchema]: segment.name,
+    })),
+  };
+  console.log("payload", payload);
 
   return (
     <>
       <div className=" min-h-screen  right-0 top-0 w-[100%]  bg-white border-2  border-yellow-300   rounded shadow-lg">
-       
         <div className="flex py-4  bg-blue-400 items-center mb-4">
           <span className=" text-white px-4 py-2 rounded mr-2">
             <MdOutlineArrowBackIos />
           </span>
           <h2 className="text-white font-semibold">Saving Segment</h2>
         </div>
-
 
         <div className="mb-4 px-4">
           <label
@@ -55,6 +64,7 @@ const [segments, setSegments] = useState([]);
             Enter the Name of the Segment
           </label>
           <input
+            onChange={(e) => SetSegmentName(e.target.value)}
             className="shadow text-sm  border rounded w-full py-3 px-3 text-gray-700 leading-tight  focus:shadow-outline"
             id="segmentName"
             type="text"
@@ -65,7 +75,6 @@ const [segments, setSegments] = useState([]);
         <p className="px-4 py-2 font-normal text-sm text-left">
           To save your segment you need to add the schemas to build query{" "}
         </p>
-
 
         <div className="flex justify-end mb-4 px-4">
           <div className="flex items-center mr-4">
@@ -82,8 +91,6 @@ const [segments, setSegments] = useState([]);
           </div>
         </div>
 
-        {/* ==================  All schemas ==================== */}
-
         <div className="flex border-2 py-2  border-blue-400 w-[100%] flex-col gap-5 mb-4 px-4">
           {segments.length > 0 &&
             segments.map((el, i) => {
@@ -91,21 +98,15 @@ const [segments, setSegments] = useState([]);
                 <SegmentItem key={i} segments={el} onRemove={removeSegment} />
               );
             })}
-        
         </div>
-   
-         {/*============ schema ========== */}
 
-      
         <div className="flex py-2  border-red-800 w-[100%] flex-col gap-5 mb-4 px-4">
-           <SchemaItem
+          <SchemaItem
             value={selectedSchema}
             onChange={handleSchemaChange}
             selectedValue={selectedSchema}
-           />
+          />
         </div>
-
-        {/*  Add to link into blue box button like  */}
 
         <div className="flex py-2  border-red-800 w-[100%] flex-col gap-5 mb-4 px-4">
           <div className="flex w-[100%] py-2  border-black items-center mr-4">
@@ -119,11 +120,9 @@ const [segments, setSegments] = useState([]);
             >
               Add new schema
             </div>
-            <div className="border-b-2 border-green-500 "/>
+            <div className="border-b-2 border-green-500 " />
           </div>
-
         </div>
-            
 
         <div className="flex justify-start  gap-4 px-4">
           <button className="bg-green-400 text-sm font-semibold text-white px-4 py-2 rounded">
@@ -133,29 +132,9 @@ const [segments, setSegments] = useState([]);
             Cancel
           </button>
         </div>
-        
-        {/* last div */}
-
       </div>
     </>
   );
 };
 
 export default RightwideDrawer;
-
-  {/* <div className="flex w-[100%] py-2  border-black items-center mr-4">
-                <span className="bg-pink-500 text-white rounded-full px-2 py-2 mr-2">
-                  <circle cx="12" cy="12" r="10" fill="green" />
-                </span>
-
-                <div className="relative w-[100%]">
-                  <select className="border-2 rounded w-[100%]  py-2 px-3 text-gray-700 leading-tight ">
-                    <option value="" disabled selected>
-                      Last name
-                    </option>
-                  </select>
-                </div>
-                <div className="border-2 m-1 px-2 py-2">
-                  <AiOutlineMinus />
-                </div>
-              </div> */}
