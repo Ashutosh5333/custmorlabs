@@ -3,7 +3,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 
 export const SchemaItem = ({ value, onChange, selectedValue }) => (
     <div className="flex w-[100%] py-2 border-black items-center mr-4">
-      <span className="bg-yellow-300 text-white rounded-full px-2 py-2 mr-2">
+      <span className="bg-gray-300 text-white rounded-full px-2 py-2 mr-2">
         <circle cx="12" cy="12" r="10" fill="green" />
       </span>
       <div className="relative w-[100%]">
