@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const handlePost = (payload) => {
-    fetch("https://nutty-clam-school-uniform.cyclic.app/usercreate", {
+  return  fetch("https://nutty-clam-school-uniform.cyclic.app/usercreate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -12,8 +12,9 @@ export const handlePost = (payload) => {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log("POST response:", data);
-      toast.success(data.message)
+      // console.log("POST response:", data);
+      return data
+      // toast.success(data.message)
     })
     .catch((error) => {
       console.error("Error:", error);
