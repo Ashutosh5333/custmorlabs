@@ -51,15 +51,19 @@ const RightwideDrawer = ({ togglePopup }) => {
     })),
   };
 
+   console.log(segments,"segmeny")
 
   const handlePostRequest = () => {
+    
     if (segment_name === "") {
-      toast.error("Fill this Field");
+      toast.error("Fill Name Segment  Field");
+    } else if(segments.length == [] || ""){
+      toast.error("Add schema");
     } else {
       handlePost(payload)
         .then((res) => {
           console.log("res", res);
-          SetSegmentName(null);
+         
           if (res?.message) {
             toast.success(res.message);
             SetSegmentName("");
@@ -70,6 +74,7 @@ const RightwideDrawer = ({ togglePopup }) => {
         .catch((err) => {
           console.log("err", err);
           toast.error(err?.message);
+          SetSegmentName(null);
         });
     }
   };
