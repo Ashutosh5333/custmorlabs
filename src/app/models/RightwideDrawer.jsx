@@ -83,19 +83,19 @@ const RightwideDrawer = ({ togglePopup }) => {
     SetSegmentName("")
   }
   
-  useEffect(() => {
-    handleGetdata()
-      .then((res) => {
-        SetData(res.data);
-      })
-      .catch((err) => {});
-  }, []) ;
+  // useEffect(() => {
+  //   handleGetdata()
+  //     .then((res) => {
+  //       SetData(res.data);
+  //     })
+  //     .catch((err) => {});
+  // }, []) ;
 
   return (
     <>
       <div onClick={togglePopup} className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-10" style={{ display: showOverlay ? 'block' : 'none' }} />
    
-      <div className="z-50 min-h-screen w-[70%] md:w-[40%] lg:w-[30%] absolute m-auto right-0 top-0 bg-white border-yellow-300 rounded shadow-lg">
+      <div className="z-50 overflow-y-scroll h-full w-[70%] md:w-[40%] lg:w-[30%] absolute m-auto right-0 top-0 bg-white border-yellow-300 rounded shadow-lg">
         <div className="flex py-4 bg-[#47a6bc] items-center mb-4">
           <span className="text-white px-4 py-2 rounded mr-2">
             <MdOutlineArrowBackIos />
@@ -139,7 +139,7 @@ const RightwideDrawer = ({ togglePopup }) => {
         </div>
 
         <div className="px-2">
-          <div className={`flex ${segments.length > 0 ? "border-2 " : ""} py-2 border-[#47a6bc] w-[100%] flex-col gap-5 mb-4 px-4`}>
+          <div className={`flex h-auto ${segments.length > 0 ? "border-2 " : ""} py-2 border-[#47a6bc] w-[100%] flex-col gap-5 mb-4 px-4`}>
             {segments.length > 0 &&
               segments.map((el, i) => {
                 return (
@@ -170,7 +170,7 @@ const RightwideDrawer = ({ togglePopup }) => {
           </div>
         </div>
 
-        <div className="flex absolute bg-gray-200 w-[100%] py-8 bottom-0 justify-start gap-4 px-4">
+        <div className="flex  mt-40  bg-gray-200 w-[100%] py-8 bottom-0 justify-start gap-4 px-4">
           <button onClick={handlePostRequest} className="bg-[#5fc7a1] text-[.8rem] font-semibold text-white px-4 py-2 rounded">
             Save the Segment
           </button>
@@ -178,6 +178,7 @@ const RightwideDrawer = ({ togglePopup }) => {
             Cancel
           </button>
         </div>
+
       </div>
 
       <ToastContainer />
