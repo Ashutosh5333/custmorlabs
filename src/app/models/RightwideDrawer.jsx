@@ -51,7 +51,7 @@ const RightwideDrawer = ({ togglePopup }) => {
     })),
   };
 
-   console.log(segments,"segmeny")
+  //  console.log(segments,"segmeny")
 
   const handlePostRequest = () => {
     
